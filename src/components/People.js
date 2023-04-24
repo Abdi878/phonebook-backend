@@ -2,6 +2,7 @@ const People = ({ people, filter, remove }) => {
   const filteredPeople = people.filter((person) =>
     person.name.toLowerCase().trim().includes(filter.toLowerCase().trim())
   );
+  console.log(filteredPeople)
   return (
     <ul>
       {filteredPeople.map((person) => (

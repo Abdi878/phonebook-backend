@@ -52,8 +52,12 @@ const App = () => {
           JSON.stringify(person.name) !== JSON.stringify(newPerson.name)
       )
     ) {
-      create(newPerson).then((res) => setPersons(persons.concat(res.data)));
-      setNotif(`Added ${newPerson.name}`);
+      create(newPerson)
+        .then((res) => {
+          setPersons(persons.concat(res.data));
+          setNotif(`Added ${newPerson.name}`);
+        })
+        .catch((error) => setNotif(error.response.data.error));
     } else {
       changeNumber(duplicate, newPerson);
     }
@@ -66,7 +70,9 @@ const App = () => {
       console.log(id);
       console.log(persons.filter((person) => person.id === id));
       remove(id);
-      setNotif(`Deleted ${persons.filter((person) => person.id === id)[0].name}`);
+      setNotif(
+        `Deleted ${persons.filter((person) => person.id === id)[0].name}`
+      );
       setPersons(persons.filter((person) => person.id !== id));
     }
   };
